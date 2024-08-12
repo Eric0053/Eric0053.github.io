@@ -1,0 +1,64 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.calendar-day {
+  border: 1px solid #ddd;
+  padding: 10px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar-day:hover {
+  background-color: #f8f9fa;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.task-item {
+  padding: 2px;
+  background: #007bff;
+  color: white;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.task-item:hover {
+  background: #0056b3;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: #f7f7f7;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1100;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.task-editor {
+  padding: 20px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}

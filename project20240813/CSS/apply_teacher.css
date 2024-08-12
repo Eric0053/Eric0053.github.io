@@ -1,0 +1,292 @@
+:root {
+    --theme-color: #02cab9;
+    --theme-color-light: #b3efea;
+    --theme-color-hover: #02ebd6;
+    --highlight-color: #ff5f5f;
+    --button-hover-shadow: 1px 2px 3px 2px rgba(0, 0, 0, 0.1);
+    }
+.bgc {
+    color: var(--theme-color);
+}
+
+.bgr {
+    background-color: rgb(255, 239, 239);
+}
+
+.test {
+    outline: 2px red solid;
+}
+
+.title_text {
+    margin: 20%;
+}
+
+.title_bg_pic{
+    position: relative;
+}
+
+.title_pic {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+
+.opening_title {
+    font-size: 2rem;
+}
+
+.op_text .money {
+    font-size: 35px;
+}
+
+.ad_text p:nth-of-type(1) {
+    font-size: 25px;
+}
+
+.teacher_btn {
+    background-color: rgb(2, 202, 185); 
+    color: white; 
+    border: none; 
+    border-radius: 8px;
+    padding: 5px;
+}
+
+
+.ad_row_area {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.advertise_pic div{
+    width: 100%;
+}
+.advertise_pic div img{
+    width: 100%;
+}
+
+.ad_discript {
+    order: 2;
+}
+
+.advertise_pic {
+    order: 1;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+}
+.apply_head{
+    width: 100px;
+    height: 100px;
+}
+.apply_head:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+.apply_border{
+    outline: 1px solid rgb(2, 202, 185) ;
+}
+
+/* .AI_teacher {
+    position: absolute; 
+} */
+.AI_teacher div {
+    position: absolute; 
+    left: 10%;
+}
+
+.AI_pic {
+    position: relative;
+}
+
+.AI_teacher_text p:nth-of-type(1){
+    font-size: 1rem;
+}
+.AI_teacher_text p:nth-of-type(2){
+    font-size: 0.7rem;
+}
+.AI_teacher_text button:nth-of-type(1){
+    font-size: 0.9rem;
+}
+.apply-expend:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.resume_border {
+    border-top: 2px solid rgb(2, 202, 185);
+    border-bottom: 2px solid rgb(2, 202, 185);
+    border-left: 1px solid rgb(2, 202, 185);
+    border-right: 1px solid rgb(2, 202, 185);
+    border-radius: 8px; 
+}
+.recommendation_text {
+    width: 100%;
+}
+.training_text{
+    width: 100%;
+}
+.recommendation_pic img{
+    width: 100%;
+}
+
+.recommendation div{
+    justify-content: center;
+}
+.training_pic img{
+    width: 100%;
+}
+
+/*-------------------------------------------------------------*/
+@media screen and (min-width:768px) {
+    
+    .title_text {
+        margin-top: 40%;
+        margin-bottom: 40%;
+        align-content: center;
+    }
+    .title_col_area .title_text p {
+        font-size: 20px;
+    }
+
+    .title_col_area .title_text .text_home_money {
+        font-size: 50px;
+    }
+    .online_talk_rowarea .online_talk{
+        max-width: 300px;
+    }
+    .option_col_area .option {
+        margin-top: 20%;
+        width: 380px;
+        height: auto;
+    }
+
+    .apply_btn {
+        margin: auto;
+    }
+
+    .opening_title {
+        margin-top: 100px;
+        font-size: 30px;
+    }
+
+    .opening {
+        margin-top: 50px;
+    }
+
+    .advertise {
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
+
+    .ad_discript {
+        order: 1;
+    }
+
+    .advertise_pic {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        order: 2;
+    }
+
+    .advertise_pic div {
+        margin-left: 70px;
+        padding-left: 70px;
+        width: 75%;
+    }
+    .advertise_pic div img{
+        width: 75%;
+    }
+
+
+    .ad_text {
+        font-size: 20px;
+        padding-left: 200px;
+
+    }
+
+    .ad_text p:nth-of-type(1) {
+        font-size: 25px;
+    }
+
+    .ad_discript {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+    }
+    .AI_teacher div {
+        position: absolute; 
+        left: 30%;
+    }
+    
+    .AI_pic {
+        position: relative;
+    }
+    .AI_teacher_text p:nth-of-type(1){
+        font-size: 2.2rem;
+    }
+    .AI_teacher_text p:nth-of-type(2){
+        font-size: 1.2rem;
+    }
+    .recommendation{
+        flex-direction: row-reverse;
+    }
+    .recommendation div{
+        justify-content: start;
+    }
+    
+    .recommendation_text {
+        max-width: 370px;
+    }
+
+    .recommendation_pic img{
+        width: 50%;
+    }
+
+    .training_text{
+        max-width: 370px;
+    }
+    .training_pic img{
+        width: 50%;
+    }
+    .slogan{
+        max-width: 200px;
+    }
+    .slogan_icon{
+        width: 50px;
+        height: 50px;
+    }
+    .yt_card {
+        flex: 0 0 calc(33.333% - 10px);
+        margin-bottom: 20px;
+        box-sizing: border-box;
+      }
+      .yt_video_card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+        height: 100%;
+      }
+      .yt_video_card_title {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      
+      .yt_video_card_title_subtitle {
+        margin-bottom: 10px;
+        color: var(--theme-color);
+      }
+      
+      .yt_video_card_title_content {
+        color: #484848;
+      }
+      .resume_item span:nth-of-type(1){
+        width: 100px;
+      }
+}
