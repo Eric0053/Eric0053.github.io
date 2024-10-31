@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .top_card {
+            width: 1400px;
+            margin: auto;
+        }
+
+        .contain {
+            width: 1400px;
+            margin: auto;
+        }
+
+        .week {
+            width: 200px;
+            text-align: center;
+        }
+
+        .display_month {
+            width: 200px;
+            text-align: center;
+            padding: 10px 0px 10px 0px;
+        }
+
+        .day_card {
+            width: 1400px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .days {
+            width: 200px;
+            height: 120px;
+            outline: 2px black solid;
+            font-size: 20px;
+            overflow: auto;
+            position: relative;
+        }
+        .days_form{
+            position: absolute;
+    top: 5px;
+    right: 5px;
+        }
+
+        .next_days {
+            background-color: antiquewhite;
+        }
+
+        .last_days {
+            background-color: antiquewhite;
+        }
+
+        .listcontnet {
+            width: 100px;
+        }
+
+        .del_btn {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top_card border-start border-end border-top border-success">
+        <div class="text-bg-success fs-3 px-5 display_year ">2024</div>
+    </div>
+    <div class="top_card border-start border-end border-success d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-success mx-5 my-3 rounded-circle pre_btn">上個月</button>
+        <div class="text-bg-success rounded-pill fs-3 py-3 my-2 display_month ">七月</div>
+        <button type="button" class="btn btn-outline-success mx-5 my-3 rounded-circle next_btn ">下個月</button>
+    </div>
+    <div class="contain">
+        <div class="d-flex flex-wrap flex-row justify-content-center ">
+            <div class="week border border-success">日</div>
+            <div class="week border border-success">一</div>
+            <div class="week border border-success">二</div>
+            <div class="week border border-success">三</div>
+            <div class="week border border-success">四</div>
+            <div class="week border border-success">五</div>
+            <div class="week border border-success">六</div>
+        </div>
+        <div class="day_card"></div>
+    </div>
+    <div class="modal" tabindex="-1" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">代辦事項</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-start">
+                    <div class="input-group input-group-sm mb-3 ">
+                        <span class="input-group-text " id="inputGroup-sizing-sm">年</span>
+                        <input type="text" class="form-control year_input" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">月</span>
+                        <input type="text" class="form-control month_input" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">日</span>
+                        <input type="text" class="form-control day_input" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-start ">
+                    <div class="input-group input-group-sm mb-3 ">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">代辦事項</span>
+                        <input type="text" class="form-control todolist_input">
+                    </div>
+                </div>
+                <div class=" d-flex justify-content-start">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">顏色</span>
+                        <input type="color" class="w-25 color_input">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary listsave_btn" data-bs-dismiss="modal">儲存</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    是否要刪除此代辦事項?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = now.getMonth();
+        let date = now.getDate();
+        let firstDayOfMonth = new Date(year, month, 1).getDay();
+        const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+        const lastDayOfLastMonth = new Date(year, month, 0).getDate();
+        const daycard = document.querySelector(".day_card");
+        const nextbtn = document.querySelector(".next_btn");
+        const prebtn = document.querySelector(".pre_btn");
+        const displaymonth = document.querySelector(".display_month");
+        const displayyear = document.querySelector(".display_year");
+        const todolistinput = document.querySelector(".todolist_input");
+        const colorinput = document.querySelector(".color_input");
+        const listsavebtn = document.querySelector(".listsave_btn");
+        const yearinput =document.querySelector(".year_input")
+        const monthinput =document.querySelector(".month_input")
+        const dayinput =document.querySelector(".day_input")
+        const key = "list_key";
+        const chineseMonths = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+        let todoIdToDelete = null;
+
+
+        nextbtn.addEventListener("click", () => {
+            nextMonth();
+            renderCalendar();
+        });
+
+        prebtn.addEventListener("click", () => {
+            preMonth();
+            renderCalendar();
+        });
+
+        window.addEventListener("load", () => {
+            renderCalendar();
+        });
+
+        listsavebtn.addEventListener("click", () => {
+            createList();
+        });
+
+        function nextMonth() {
+            month++;
+            if (month > 11) {
+                year++;
+                month = 0;
+            }
+            firstDayOfMonth = new Date(year, month, 1).getDay();
+            displaymonth.innerText = chineseMonths[month];
+            displayyear.innerText = year;
+        }
+
+        function preMonth() {
+            month--;
+            if (month < 0) {
+                year--;
+                month = 11;
+            }
+            firstDayOfMonth = new Date(year, month, 1).getDay();
+            displaymonth.innerText = chineseMonths[month];
+            displayyear.innerText = year;
+        }
+
+        function renderCalendar() {
+            daycard.innerHTML = "";
+            calendar();
+            loadTodoItems();
+        }
+
+        function calendar() {
+            for (let i = firstDayOfMonth; i > 0; i--) {
+                const day_creat = document.createElement('div');
+                day_creat.classList.add('days', 'last_days',);
+                day_creat.innerText = lastDayOfLastMonth - i + 1;
+
+                daycard.appendChild(day_creat);
+            }
+            for (let i = 1; i <= lastDateOfMonth; i++) {
+                const day_creat = document.createElement('div');
+                day_creat.classList.add('days');
+                day_creat.innerText = i;
+                day_creat.innerHTML += `<div class='d-flex justify-content-end days_form'>
+                <button class='btn text-bg-success rounded-pill shadow data_id'> New</button></div>`;
+                daycard.appendChild(day_creat);
+            }
+            const total = firstDayOfMonth + lastDateOfMonth;
+            const remainingDays = 7 - (total % 7);
+            for (let i = 1; i <= remainingDays; i++) {
+                const day_creat = document.createElement('div');
+                day_creat.classList.add('days', 'next_days');
+                day_creat.innerText = i;
+                
+                daycard.appendChild(day_creat);
+            }
+
+            const myBoot = new bootstrap.Modal(document.querySelector('#mymodal'));
+            const listbtnmodals = document.querySelectorAll(".data_id");
+            listbtnmodals.forEach((element, index) => {
+                element.addEventListener("click", (e) => {
+                    myBoot.show(e);
+                    date = new Date(year, month, (index+1)).getDate();
+                    dayinput.value= date
+                    yearinput.value= year
+                    monthinput.value= month+1
+                });
+            });
+        }
+
+        function createList() {
+            const todoContent = todolistinput.value.trim();
+            const colorContent = colorinput.value;
+            if (!todoContent) {
+                return;
+            }
+            const todoItem = {
+                year: year,
+                month: month + 1,
+                day: date,
+                id: new Date().valueOf(),
+                content: todoContent,
+                color: colorContent
+            };
+            saveTodoItem(todoItem);
+
+        }
+
+        function getTodoListFromStorage() {
+            const localStorageData = localStorage.getItem(key);
+            return localStorageData ? JSON.parse(localStorageData) : [];
+        }
+
+        function saveTodoItem(todoItem) {
+            const todoList = getTodoListFromStorage();
+            todoList.push(todoItem);
+            localStorage.setItem(key, JSON.stringify(todoList));
+            renderCalendar()
+        }
+
+        function loadTodoItems() {
+    const renew = getTodoListFromStorage();
+    const listInputs = document.querySelectorAll(".days");
+    listInputs.forEach(dayElement => {
+        const dayNumber = parseInt(dayElement.innerText);
+        const items = renew.filter(todo => todo.day === dayNumber && todo.month === (month + 1) && todo.year === year);
+        items.forEach(item => {
+            const todoDiv = document.createElement('div');
+            todoDiv.classList.add('listcontent', 'my-1', 'd-flex', 'align-items-center');
+            todoDiv.dataset.id = item.id;
+            todoDiv.addEventListener('click', () => {
+                showDeleteModal(item.id);
+            });
+
+            // 創建項目符號
+            const bullet = document.createElement('span');
+            bullet.classList.add('bullet-point');
+            bullet.style.backgroundColor = item.color; 
+            bullet.style.width = '10px';
+            bullet.style.height = '10px';
+            bullet.style.borderRadius = '50%';
+            bullet.style.marginLeft = '8px';
+            bullet.style.flexShrink = '0'; 
+
+            // 創建待辦事項文本
+            const textContent = document.createElement('span');
+            textContent.classList.add('text-black', 'overflow-x-hidden', 'text-wrap','m-1');
+            textContent.style.wordBreak = 'break-word'; 
+            textContent.textContent = item.content;
+
+            // 將項目符號和文本添加到待辦事項 div
+            todoDiv.appendChild(bullet);
+            todoDiv.appendChild(textContent);
+
+            dayElement.appendChild(todoDiv);
+        });
+    });
+}
+        //刪除跳出modal
+        function showDeleteModal(id) {
+            todoIdToDelete = id; 
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+            deleteTodoItem(todoIdToDelete);
+            todoIdToDelete = null; 
+            const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+            deleteModal.hide();
+        });
+        //刪除
+        function deleteTodoItem(id) {
+            let todoList = getTodoListFromStorage();
+            todoList = todoList.filter(todo => todo.id !== id); 
+            localStorage.setItem(key, JSON.stringify(todoList)); 
+            renderCalendar(); 
+        }
+
+    </script>
+
+</body>
+
+</html>
